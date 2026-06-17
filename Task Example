@@ -1,0 +1,29 @@
+Link:- https://www.edaplayground.com/x/Q7GL
+testbench.sv
+      module task_sum_tb;
+        reg[7:0] a,b;
+        wire[7:0]s;
+        
+        
+        task_sum obj1(a,b,s);
+      initial begin
+        $monitor("time=%0t,a=%d,b=%d,sum=%d",$time,a,b,s);
+        a=3;b=5;
+        #5
+        a=30;b=5;
+        #5
+        a=3;b=10;
+        #1
+        $finish;
+      end
+          endmodule
+design.sv
+        module task_sum(input[7:0] a,b, output reg[7:0]s);
+          always @(a,b)
+            sum_2_var(a,b,s);
+          task sum_2_var(input[7:0] a,b, output reg[7:0]s);
+            begin
+              s=a+b;
+            end
+          endtask
+        endmodule
