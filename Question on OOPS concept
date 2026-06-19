@@ -1,0 +1,36 @@
+Link:- https://www.edaplayground.com/x/Gmwc
+class my_class;
+  integer a,b,sum;
+
+  task getin(integer x,integer y);
+    begin
+      a=x;
+      b=y;
+    end
+  endtask
+
+  task add;
+    begin
+      sum=a+b;
+    end
+  endtask
+
+  task display;
+    begin
+      $display("Value of a=%0d",a);
+      $display("Value of b=%0d",b);
+      $display("Sum=%0d",sum);
+    end
+  endtask
+endclass
+
+module test;
+  my_class obj;
+
+  initial begin
+    obj=new();
+    obj.getin(10,20);
+    obj.add();
+    obj.display();
+  end
+endmodule
