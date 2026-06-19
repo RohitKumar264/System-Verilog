@@ -1,0 +1,28 @@
+Link: https://www.edaplayground.com/x/WaxG
+
+module disable_fork;
+  initial begin
+    $display($time,"\t-------");
+    fork
+      begin
+        $display($time,"\tProcess-1 Started");
+        #30;
+        $display($time,"\tProcess-1 ended");
+      end
+      begin
+        sub_process();
+      end
+    join_any;
+    
+    disable fork;
+      $display("--------------");
+      $display($time,"\tAfter Disable fork");
+      $display("--------------");
+  end
+      //sub-process
+      task sub_process;
+        $display($time,"\tSub-Process Started");
+        #10
+        $display($time,"\tSub-Process Ended");
+      endtask
+endmodule
