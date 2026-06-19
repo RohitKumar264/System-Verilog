@@ -1,0 +1,50 @@
+testbench.sv
+            module task_sum_tb;
+              reg[7:0] a,b;
+              wire[7:0]s;
+              
+              
+              task_sum obj1(a,b,s);
+            initial begin
+              $monitor("time=%0t,a=%d,b=%d,sum=%d",$time,a,b,s);
+              a=3;b=5;
+              #5
+              a=30;b=5;
+              #5
+              a=3;b=10;
+              #1
+              $finish;
+              end
+            endmodule
+design.sv
+          module task_sum(
+              input [7:0] a, b,
+              output reg [7:0] s
+          );
+          
+          reg [7:0] tmp;
+          
+            always @(a,b) begin
+              sum_2_var(a, b, s);
+          end
+          
+          task sum_2_var;
+              input [7:0] a, b;
+              output [7:0] s;
+          
+              begin
+                  double_var(a, tmp);
+                  s = tmp + b;
+              end
+          endtask
+          
+            function double_var(
+              input [7:0] a,
+              output [7:0] tmp);
+          
+              begin
+                 double_var=2*a;
+              end
+            endfunction
+          
+          endmodule
