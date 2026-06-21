@@ -1,0 +1,42 @@
+// Code your testbench here
+// Create a static function to display the no of students enrolled.
+//-->Try to use static variable inside a static function.
+//-->use the non-static variable inside the static function(error make it comment).
+//--> Create a array of student and try to access the static properties using the object handle as well ass the class name.
+//--> Also access the static property without creating the object(through handle).
+
+class student;
+  int rn,mrk;
+  static int no_of_std_enrolled;
+  function new(int x,y);
+    rn=x;
+    mrk=y;
+    no_of_std_enrolled++;
+  endfunction
+  
+  static function void display();
+    $display("=============");
+    $display("No.of student enrolled:%0d",no_of_std_enrolled);
+    //$display("Roll no=%0d",rn);
+    //$display("Mark=%0d",mrk);
+    $display("=============");
+  endfunction
+endclass
+
+module test;
+  student std[3],s,s1,s2,s3;
+  initial begin
+    s=new(1,81);
+    s.display();
+    s1=new(2,91);
+    s1.display();
+    s2=new(3,93);
+    s2.display();
+    foreach(std[i])begin
+      std[i]=new(i+1,i+90);
+      std[i].display();
+    end
+    student::display();
+    $display("No.of student enrolled:%0d",s3.no_of_std_enrolled);
+  end
+endmodule
