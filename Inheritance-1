@@ -1,0 +1,46 @@
+Link: https://www.edaplayground.com/x/QVBd
+
+class class_a;
+  int a;
+  function new();
+    a=10;
+  endfunction
+endclass
+
+class class_b extends class_a;
+  int b,a;
+  
+  function new();
+    b=20;
+    a=22;
+  endfunction
+  
+  function void display();
+    $display("-------------------------");
+    $display("class_b b = %0d",b);
+    $display("class_a a = %0d",a);  
+    $display("Modifying Superclass a");  
+    super.a =13;
+    $display("Super: class_a a = %0d",super.a); 
+    $display("class_b a = %0d",a); 
+    $display("-------------------------");
+  endfunction
+endclass
+
+// Code your design here
+module inheritance;
+    class_b b1 ,a1;
+  initial begin    
+    b1 =new();//creating b object
+    a1=new();
+    b1.display();
+    $display("Printing inside top:");  
+    $display("Value of b1.a = %0d b1.b = %0d a1.a= %0d",b1.a, b1.b, a1.a);
+    b1.a = 15;
+    b1.b = 25;
+    $display("Value of b1.a = %0d b1.b = %0d",b1.a, b1.b);
+    
+    
+  end
+endmodule
+  dule
