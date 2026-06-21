@@ -1,0 +1,61 @@
+Link: https://www.edaplayground.com/x/fW97
+
+/*write a code constituting a parent class with set of different properties with having scenario.
+i. one property is common in both the classes.
+ii. now following above scenario write a method inside class to access parent copy and the child copy of that c ommon value.*/
+
+class student;
+  static int rno;
+  int mark;
+  int semester;
+  
+  function new();
+    rno+=1;
+    mark=5;
+    semester=4;
+  endfunction
+  
+  function void display();
+    $display("roll number=%0d, mark=%0d, semester=%0d", rno, mark, semester);
+  endfunction
+  
+endclass
+
+class detailed_info extends student;
+  real sem1;
+  real sem2;
+  int semester;
+  
+  function new();
+    sem1=10;
+    sem2=10;
+    semester=3;
+  endfunction
+  
+  function void display();
+    super.display();
+    $display("sem1 cgpa=%0f, sem2 cgpa=%0f, semester=%0d",sem1,sem2,semester);
+    $display("Current Semester: %0d",this.semester);
+    $display("Parent Semester: %0d",super.semester);
+  endfunction
+  
+endclass
+
+module test;
+  detailed_info c2;
+  student c1;
+  initial begin
+    c1=new();
+    c2=new();
+    c2.display();
+//     $display("before modification in child class rno =%0d, mark=%0d, sem1=%0f, sem2=%0f", c2.rno,c2.mark,c2.sem1,c2.sem2);
+//     $display("before modification in parent class rno =%0d, mark=%0d", c1.rno,c1.mark);
+    c2.mark=50;
+    c2.sem1=8.05;
+    $display("after modification in child");
+    c2.display();
+//     $display("after modification in child rno =%0d, mark=%0d, sem1=%0f, sem2=%0f", c2.rno,c2.mark,c2.sem1,c2.sem2);
+//     $display("after modification in parent class rno =%0d, mark=%0d", c1.rno,c1.mark);
+    
+  end
+endmodule
