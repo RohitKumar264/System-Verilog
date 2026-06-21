@@ -1,0 +1,31 @@
+Link: https://www.edaplayground.com/x/E2gd
+
+class student;
+  local int marks=95;
+  function int get_marks();
+    return marks;
+  endfunction
+  protected function void show_marks();
+    $display("Marks= %0d",marks+2);
+  endfunction
+    
+endclass
+
+class result extends student;
+  function void display();
+    show_marks();
+  endfunction
+endclass
+
+
+module test;
+  result s;
+  initial begin
+    s=new();
+    $display("Accessing local variable");
+    $display("Marks= %0d",s.get_marks());
+    $display("Accessing protected method");
+    s.display();
+    //$display("Marks= %0d",s.marks);
+  end
+endmodule
